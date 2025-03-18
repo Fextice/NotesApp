@@ -1,0 +1,100 @@
+﻿@{
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model NotesApp.Models.Note
+@{
+    ViewBag.Title = "Редактирование заметки";
+}
+<h2>Редактировать заметку</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title, "Заголовок")
+        @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Content, "Содержимое (Markdown)")
+        @Html.TextAreaFor(model => model.Content, new { @class = "form-control", rows = 10, id = "Content" })
+        @Html.ValidationMessageFor(model => model.Content)
+    </div>
+
+    <!-- Блок для добавления фото -->
+    <div class="form-group">
+        <label for="photoUpload">Добавить фото</label>
+        <input type="file" id="photoUpload" name="photoUpload" accept="image/jpeg,image/svg+xml,image/gif,image/png" class="form-control-file" />
+    </div>
+    <div id="dropZone" style="border: 2px dashed #ccc; padding: 10px; text-align: center; margin-bottom: 15px;">
+        Перетащите фото сюда для загрузки
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const photoInput = document.getElementById('photoUpload');
+            const dropZone = document.getElementById('dropZone');
+            const textArea = document.getElementById('Content');
+
+            // Функция для загрузки файла через AJAX
+            function uploadFile(file) {
+                const formData = new FormData();
+                formData.append("file", file);
+
+                fetch('@Url.Action("UploadPhoto", "Notes")', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Вставляем Markdown-ссылку на фото в текст заметки
+                        const markdownImage = `![Фото](${data.url})\n`;
+                        textArea.value += markdownImage;
+                    } else {
+                        alert("Ошибка загрузки: " + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error("Ошибка при загрузке файла:", error);
+                });
+            }
+
+            // Обработка выбора файла через input
+            if (photoInput) {
+                photoInput.addEventListener('change', function (e) {
+                    if (e.target.files && e.target.files[0]) {
+                        uploadFile(e.target.files[0]);
+                    }
+                });
+            }
+
+            // Обработка событий drag & drop
+            if (dropZone) {
+                dropZone.addEventListener('dragover', function (e) {
+                    e.preventDefault();
+                    dropZone.style.borderColor = "#000";
+                });
+
+                dropZone.addEventListener('dragleave', function (e) {
+                    e.preventDefault();
+                    dropZone.style.borderColor = "#ccc";
+                });
+
+                dropZone.addEventListener('drop', function (e) {
+                    e.preventDefault();
+                    dropZone.style.borderColor = "#ccc";
+                    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                        uploadFile(e.dataTransfer.files[0]);
+                    }
+                });
+            }
+        });
+    </script>
+}

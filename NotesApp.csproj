@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Workspace\NewDirectory1\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Shared\Error.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\_ValidationScriptsPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Folder\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Folder\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Folder\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Folder\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Folder\Index.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Markdig" Version="0.40.0" />
+    </ItemGroup>
+
+</Project>

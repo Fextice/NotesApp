@@ -1,0 +1,32 @@
+﻿@{
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model NotesApp.Models.Note
+@{
+ViewBag.Title = "Подтверждение удаления заметки";
+}
+
+<h2>Удалить заметку</h2>
+<h3>Вы уверены, что хотите удалить эту заметку?</h3>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h4 class="card-title">@Model.Title</h4>
+        <p class="card-text">
+            Создана: @Model.CreatedDate.ToString("g")
+        </p>
+        <p class="card-text">
+            @Html.Raw(Model.Content)
+        </p>
+    </div>
+</div>
+
+@using (Html.BeginForm("Delete", "Notes", FormMethod.Post))
+{
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.Id)
+<button type="submit" class="btn btn-danger">Удалить</button>
+@Html.ActionLink("Отмена", "Index", null, new { @class = "btn btn-secondary ml-2" })
+}

@@ -1,0 +1,36 @@
+﻿@{
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model IEnumerable<NotesApp.Models.Note>
+@{
+ViewBag.Title = "Список заметок";
+}
+<h2>Заметки</h2>
+<p>
+    @Html.ActionLink("Создать новую заметку", "Create")
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Заголовок</th>
+        <th>Дата создания</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var note in Model)
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => note.Title)</td>
+        <td>@note.CreatedDate.ToString("g")</td>
+        <td>
+            @Html.ActionLink("Просмотр", "Details", new { id = note.Id }) |
+            @Html.ActionLink("Редактировать", "Edit", new { id = note.Id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id = note.Id })
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>

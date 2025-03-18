@@ -1,0 +1,22 @@
+﻿@{
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model NotesApp.Models.Note
+@using Markdig
+@{
+    ViewBag.Title = "Просмотр заметки";
+    string content = Model.Content;
+    content = System.Text.RegularExpressions.Regex.Replace(content, @"(?<=\S)(!\[Фото\])", " $1");
+    string htmlContent = Markdown.ToHtml(content);
+}
+<h2>@Model.Title</h2>
+<p><strong>Дата создания:</strong> @Model.CreatedDate.ToString("g")</p>
+<div>
+    @Html.Raw(htmlContent)
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Вернуться к списку", "Index")
+</p>
