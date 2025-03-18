@@ -11,9 +11,9 @@
 - **Просмотр заметок:** Отображение списка заметок
 - **Поддержка Markdown:** Содержимое заметок хранится и обрабатывается в формате Markdown, используется библиотека [Markdig](https://github.com/xoofx/markdig) для конвертации Markdown в HTML
 - **Загрузка изображений:** Возможность прикреплять фотографии как через перетаскивание, так и через кнопку выбора файла. Изображения сохраняются в файловой системе в папке `Workspace/pictures`
-- ![image](https://github.com/user-attachments/assets/5cd3a4fd-cd6c-4b86-ae77-e633a8c1930a)
-- ![image](https://github.com/user-attachments/assets/0811a5b7-148d-40d9-9a5b-7b8c4db111b1)
-- ![image](https://github.com/user-attachments/assets/aef47c52-9a7a-405b-9925-30ea9ad72b0e)
-- ![image](https://github.com/user-attachments/assets/3ca6a1b1-7b73-4a99-9b57-c986cb43c12b)
+ ![image](https://github.com/user-attachments/assets/5cd3a4fd-cd6c-4b86-ae77-e633a8c1930a)
+ ![image](https://github.com/user-attachments/assets/0811a5b7-148d-40d9-9a5b-7b8c4db111b1)
+ ![image](https://github.com/user-attachments/assets/aef47c52-9a7a-405b-9925-30ea9ad72b0e)
+ ![image](https://github.com/user-attachments/assets/3ca6a1b1-7b73-4a99-9b57-c986cb43c12b)
 
 
